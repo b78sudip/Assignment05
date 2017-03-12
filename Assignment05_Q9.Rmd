@@ -1,0 +1,156 @@
+---
+title: "Assignment 05"
+author: "Sudip Bhattacharyya"
+date: "February 23, 2017"
+output: html_document
+---
+
+# Introduction
+
+This R markdown document gives the codes and outputs for questions in Assignment 04.
+
+
+
+## Q1. Basic Math
+## a. The log of a positive number. 
+## b. What is the default base for the log function? Calculate the log of your previous number with a di???erent base.
+## c. The log of a negative number. (explain the answer) 
+## d. The square-root of a positive number.
+
+~~~{r}
+> log(100)
+[1] 4.60517
+> log(100,base=2.71828)
+[1] 4.605173
+> log(100,base=10)			# R calculates Natural log by default i.e. considers e(=2.71828) as default base for logarithm calculation. 
+[1] 2
+> log10(100)
+[1] 2
+> log2(100)
+[1] 6.643856
+> log(-100)
+[1] NaN
+Warning message:
+In log(-100) : NaNs produced		# R returns 'Undefined' while calculating log of a negative number. y=logb(x) => b^y=x. Since b>0, b^y>0 and then x must be positive.
+> sqrt(100)
+[1] 10
+> 
+
+
+~~~
+
+
+
+## Q2. Random number generation.
+## a. Create a vector of 15 standard normal random variables. Calculate its mean and SD. 
+## b. Change the mean to 10 and the SD to 2 and recalculate the vector of 15 random normal variables. Calculate its mean and SD. 
+## c. Why are the means and SD not exactly the same as the means and SDs speci???ed in the function?
+
+~~~{r}
+
+> v1 <- rnorm(15,mean=0, sd=1)
+> v1
+ [1] -0.8505955  0.6153330 -0.4668441 -0.9725967  1.2611619  0.2045179
+ [7] -1.0969561  2.1606115  0.9338981 -1.2963619  0.5844936  0.8922469
+[13]  1.3382470  1.8605659  0.6005961
+> mean(v1)
+[1] 0.3845545
+> sd(v1)
+[1] 1.097253
+> 
+> 
+> v2 <- rnorm(15,mean=10,sd=2)
+> v2
+ [1]  5.477414  9.157440  7.187121  9.632425 11.261464 11.960996 12.926637
+ [8] 13.226339 11.885532  8.193173 11.692259  9.929576  7.432709  7.291522
+[15] 13.596805
+> mean(v2)
+[1] 10.05676
+> sd(v2)
+[1] 2.537243
+> 
+
+
+#	Calculated means and standard deviations are different from the mentioned one in the function because of the number of elements in the vector. A distribution has uncounted elements and when we choose limited number of elements from a distribution they contain little bias and that is why we see the stated difference. The more elements we consider in the vector, the lesser gap we will observe between calculated mean/sd and stated mean/sd in the function.
+
+~~~
+
+
+
+
+
+
+## Q3. Vector Operations
+## a. The weights of 6 individuals in kg are 60, 72, 57, 90, 95, 72. 
+## b. Their heights (in m) are 1.80, 1.85, 1.72, 1.90, 1.74, 1.91. 
+## c. Enter these vectors into R. 
+## d. Create a scatterplot of weight vs. height. Interpret the scatterplot. 
+## e. Calculate the BMI for each individual. (BMI = weight in kg divided by the square of the height in m) 
+## f. Calculate the mean for weight. 
+## g. Subtract the mean from each value of weight.
+## h. Sum the result. Now you know why we square the deviations from the mean to calculate a standard deviation!
+
+~~~{r}
+
+> weight <- c(60, 72, 57, 90, 95, 72)
+> weight
+[1] 60 72 57 90 95 72
+> height <- c(1.80, 1.85, 1.72, 1.90, 1.74, 1.91)
+> height
+[1] 1.80 1.85 1.72 1.90 1.74 1.91
+> 
+> ?plot
+starting httpd help server ... done
+> plot(height, weight)
+> 
+> 
+##  From the scatterplot, we get to see that weight ranges from 57kg to 95 kg whereas height ranges from 1.72m to 1.91m. The scatterplot shows a positive relation 
+between heights and weights except two outliers - (72, 1.91) and (95, 1.74).
+
+
+> 
+> weight
+[1] 60 72 57 90 95 72
+> height
+[1] 1.80 1.85 1.72 1.90 1.74 1.91
+> bmi <- weight/height^2
+> bmi
+[1] 18.51852 21.03725 19.26717 24.93075 31.37799 19.73630
+>
+>
+>
+> mean(weight)
+[1] 74.33333
+> deviation.mean.weight <- weight - mean(weight)
+> deviation.mean.weight
+[1] -14.333333  -2.333333 -17.333333  15.666667  20.666667  -2.333333
+> total.deviation.mean.weight <- sum(c())
+> total.deviation.mean.weight
+[1] 0
+> 
+
+# Mean deviations nullify each other and sum is always 0 not reflecting the true picture.
+
+~~~
+
+
+## Q4. Your data science pro???le. Enter your data science pro???le into R as a data frame with two columns. Call it by your ???rst name. The categories are computer programming, math, statistics, machine learning, domain expertise, communication and presentation skills, and data visualization. Your ranking for each category 1 5, with 5 as best.Create a bar graph of your data science pro???le. When you submit your work, please submit your code, including the data entry piece.
+~~~{r}
+>Category <- c("Computer Programming", "Mathematics", "Statistics","Machine Learning", "Domain Expertise", "Communication & Presentation Skills", "Data Visualization")
+> Rating <- c(4, 5, 5, 2, 3, 3, 2)
+> Sudip <- data.frame(Category, Rating)
+
+
+# The Data Science profile of Sudip Bhattacharyya is
+
+Sudip
+                             Category Rating
+1                Computer Programming      4
+2                         Mathematics      5
+3                          Statistics      5
+4                    Machine Learning      2
+5                    Domain Expertise      3
+6 Communication & Presentation Skills      3
+7                  Data Visualization      2
+
+~~~
